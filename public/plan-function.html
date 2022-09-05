@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.8.2.min.js">
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/angular.min.js"></script>
+
+    <title>Document</title>
+
+    <style>
+
+      body{
+
+        background: #20002c;  
+        background: -webkit-linear-gradient(to right, #cbb4d4, #20002c);  
+        background: linear-gradient(to right, #cbb4d4, #20002c);
+
+
+       }
+
+        h1 {
+        text-align: center;
+        font-family:'Times New Roman', Times, serif;
+        font-style: oblique;
+        font-weight: bolder;
+        color: whitesmoke;
+      }
+
+               
+      .btnShow {
+            background-image: linear-gradient(to right, #614385 0%, #516395  51%, #614385  100%);
+            color: white;
+            border: 1px solid #eeee;
+           
+            
+            
+          }
+
+         
+
+           .vendor-img:hover{
+
+            transform: scale(1.03);
+
+          }
+
+          .card-img-top {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+         
+                   
+    </style>
+
+    <script>
+
+        var module = angular.module("kuchmodule", []);  // Creating angular module
+
+        module.controller("kuchbhicontroller", function ($scope, $http) { // creating angular controller
+           
+            $scope.jsonArray = []; // To store distinct cities to show in combobox
+           
+            $scope.city = function () {
+
+                $http.get("/fetch-cities").then(fxOkKuch, fxNotOkKuch); // ajax call in angular to fetch distinct cities 
+                function fxOkKuch(response) {
+                     
+                    //alert(JSON.stringify(response.data));  
+                    $scope.jsonArray = response.data;
+               
+                }
+
+                function fxNotOkKuch(response) {
+                    alert(response.data);
+                }
+            }
+
+
+           
+            $scope.setCities=[];   // to store selected services to show in combobox
+            $scope.jsonarrserve=[]; // To store selected services object as response 
+
+          $scope.service1=function(){
+
+            $http.get("/take-selected-services").then(fxOkKuch, fxNotOkKuch); // ajax call in angular to fetch selected services from vendor table
+            function fxOkKuch(respo){
+
+               // alert(JSON.stringify(respo.data));
+               
+                 $scope.jsonarrserve=respo.data;
+
+                 var arr="";
+                 for(i=0;i<$scope.jsonarrserve.length;i++)
+                 {
+                     arr=arr+$scope.jsonarrserve[i].selected_service+",";
+                 }
+                 //alert(arr);
+                arr=arr.substr(0,arr.length-1);//FOR REMOVING , FROM END
+                var ary=arr.split(",");
+              
+                var setCity=new Set(ary); // Creating a Set in oder to have unique services
+                $scope.setCities=Array.from(setCity); // Coverting a set to array
+             //alert($scope.setCities);
+            
+               
+            }
+            function fxNotOkKuch(response) {
+                    alert(respo.data);
+                }
+        }
+          
+
+
+            $scope.jsonArray2 = [];
+            $scope.show=function(){
+               
+                  var ciity= $scope.cityselect;
+                  var serve=$scope.serviceselect;
+
+                 
+
+                $http.get("/pick-vendor?thiscity="+ciity+"&thisserv="+serve).then(fxOkKuch, fxNotOkKuch);
+                function fxOkKuch(response){
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonArray2=response.data;
+
+                }
+                function fxNotOkKuch(response) {
+                    alert(response.data);
+                }
+    }
+
+    $scope.doStoreId=function(id)
+    {
+         sessionStorage.setItem('vendorId',id);
+         window.location.href="Detail.html";
+    }
+   
+        })
+
+       
+        
+    </script>
+</head>
+<body ng-app="kuchmodule" ng-controller="kuchbhicontroller" ng-init="city();service1();">
+
+    <header class="mt-3 mb-3">
+        <h1>Vendor Finder</h1>
+      </header>
+
+      <div class="container mt-3 mb-3">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="cityselect" class="form-label text-light fs-5">Select City</label>
+                <select class="form-select" id="cityselect" ng-model="cityselect">
+                    <option disabled selected>Select City</option>
+                    <option ng-repeat="obj in jsonArray" value="{{obj.city}}">{{obj.city}}</option>
+                  </select>
+            
+            </div>
+            <div class="col-md-6">
+                <label for="serviceselect" class="form-label text-light fs-5">Select Service</label>
+                <select class="form-select" id="serviceselect" ng-model="serviceselect">
+                    <option disabled selected>Select Service</option>
+                    <option ng-repeat="st in setCities" value="{{st}}">{{(st)}}</option>
+                  </select>
+            </div>
+            
+        </div>
+      </div>
+
+          
+           <div class="text-center">
+
+            <button type="button" class="btnShow rounded btn-lg" ng-click="show();">Show Vendors</button>
+
+           </div>
+           
+
+
+           <!--------------------------------CARD----------------------------------------------------------->
+           
+           <div class="container">
+
+            <div class="row">
+               <div class="col-md-4 mt-5 mb-3" style="width:18rem" ng-repeat="ob in jsonArray2">
+                <div class="card h-100" >
+                    <img src="proofupload/{{ob.id_proof}}" class="card-img-top vendor-img" >
+                    <div class="card-body">
+                     <div class="text-center">
+                      <h5 class="card-title">{{ob.name}}</h5>
+                      <p>Mobile : {{ob.contact}}</p>
+                      <p>City : {{ob.city}}</p>
+                      <button type="button" class="btn btn-dark" ng-click="doStoreId(ob.email);">Details</button>
+                     </div>
+                    </div>
+                  </div>
+
+               </div>
+           </div>
+        </div>
+           
+   
+</body>
+</html>

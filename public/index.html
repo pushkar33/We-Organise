@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>We Organize</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/owl.carousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/venobox/venobox.css" rel="stylesheet" />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+    <script>
+      $(document).ready(function () {
+        $("#log").click(function () {
+          var eid = $("#floatingemail").val();
+          var pwd = $("#Pwd").val();
+
+          var url = "/chko-user?thisuser=" + eid + "&thispwd=" + pwd;
+          $.get(url, function (kuchJsonAry) {
+            JSON.stringify(kuchJsonAry);
+            alert("Hello " + kuchJsonAry[0].type);
+
+            if (!(kuchJsonAry.length == 0)) {
+              sessionStorage.setItem("person", eid);
+
+              if (kuchJsonAry[0].type == "client") {
+                window.location.href = "/dash-client.html";
+              } else window.location.href = "/dash-vendor.html";
+            } else {
+              alert("Invalid Details");
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+      <div class="container d-flex">
+        <div class="contact-info mr-auto">
+          <i class="icofont-phone"></i> +91 8837825822
+          <i class="bi bi-envelope-fill"></i> pushkargoyal9417@gmail.com
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <img
+          src="pics/logo.jpg"
+          width="80px"
+          height="80px"
+          style="
+            border-radius: 50%;
+            background-size: contain;
+            margin-right: 10px;
+          "
+        />
+
+        <h1 class="logo mr-auto"><a href="index.html"> WE ORGANIZE</a></h1>
+
+        <nav class="nav-menu d-none d-lg-block">
+          <ul>
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+              <button
+                type="button"
+                class="btn btn-outline-primary mt-1"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Signup
+              </button>
+            </li>
+
+            <li>
+              <button
+                type="button"
+                class="btn btn-outline-primary mt-1"
+                data-bs-toggle="modal"
+                data-bs-target="#wowmodal"
+              >
+                Login
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <!-- .nav-menu -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+      <div
+        class="container position-relative text-center text-lg-left"
+        data-aos="zoom-in"
+        data-aos-delay="100"
+      >
+        <div class="row">
+          <div class="col-lg-8">
+            <h1>
+              We Do Not Remember The Days,But Rather The <span>Moments</span>
+            </h1>
+            <h2>Bringing great moments to you!</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+      <!-- ======= About Section ======= -->
+      <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+            <div
+              class="col-lg-6 order-1 order-lg-2"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="about-img">
+                <img src="assets/img/about.jpg" alt="" />
+              </div>
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+              <h3>ABOUT : WE ORGANIZE</h3>
+              <p class="font-italic">
+                has some expertise in delivering inventive, advanced and
+                bleeding edge events, utilizing a center conviction that
+                narrating drives our innovative methodology.
+              </p>
+              <ul>
+                <li>
+                  <i class="icofont-check-circled"></i> event planning services
+                  from a team of experienced and energetic event planners,
+                  suppliers, venues and more..
+                </li>
+                <li>
+                  <i class="icofont-check-circled"></i> our client is the actual
+                  planner and we organize will only provide services.
+                </li>
+                <li>
+                  <i class="icofont-check-circled"></i> gives key event
+                  arranging and innovative conveyance of gatherings and events
+                  for an assortment of businesses, including, innovation,
+                  pharmaceutical, non-benefit, athletic and the sky is the limit
+                  from there..
+                </li>
+              </ul>
+              <p>
+                One of the main reasons behind the success of we organize is the
+                fact that the team does not plan any event but only provides
+                client with all kinds of services that are required to plan a
+                particular function.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End About Section -->
+
+      <!-- ======= Why Us Section ======= -->
+      <section id="why-us" class="why-us">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Why Us</h2>
+            <p>Why Choose Our Services</p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                <span>01</span>
+                <h4>YOU PLAN</h4>
+                <p>our client is the actual planner .</p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+              <div class="box" data-aos="zoom-in" data-aos-delay="200">
+                <span>02</span>
+                <h4>WE PROVIDE SERVICES</h4>
+                <p>
+                  event planning services from a team of experienced and
+                  energetic event planners, suppliers, venues and more..
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-lg-0">
+              <div class="box" data-aos="zoom-in" data-aos-delay="300">
+                <span>03</span>
+                <h4>CREATE MOMENTS</h4>
+                <p>
+                  gives key event arranging and innovative conveyance of
+                  gatherings and events for an assortment of businesses,
+                  including, innovation, pharmaceutical, non-benefit and the
+                  sky’s the limit from there..
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Why Us Section -->
+
+      <!-- ======= Events Section ======= -->
+      <section id="events" class="events">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Events</h2>
+            <p>Organize Your Events Using Our Services</p>
+          </div>
+
+          <div
+            class="owl-carousel events-carousel"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="row event-item">
+              <div class="col-lg-6">
+                <img
+                  src="assets/img/event-birthday.jpg"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="col-lg-6 pt-4 pt-lg-0 content">
+                <h3>Birthday Parties</h3>
+
+                <p class="font-italic">
+                  A birthday party is a celebration of the anniversary of the
+                  birth of the person who is being honored. The tradition
+                  started in the mid-nineteenth century but did not become
+                  popular until the mid-twentieth century. Birthday parties are
+                  now a feature of many cultures. In Western cultures, birthday
+                  parties include a number of common rituals.
+                </p>
+              </div>
+            </div>
+
+            <div class="row event-item">
+              <div class="col-lg-6">
+                <img
+                  src="assets/img/event-private.jpg"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="col-lg-6 pt-4 pt-lg-0 content">
+                <h3>Wedding Parties</h3>
+
+                <p class="font-italic">
+                  A wedding is a ceremony where two people are united in
+                  marriage. Wedding traditions and customs vary greatly between
+                  cultures, ethnic groups, religions, countries, and social
+                  classes.It is considered a cultural universal, but the
+                  definition of marriage varies between cultures and religions,
+                  and over time.
+                </p>
+              </div>
+            </div>
+
+            <div class="row event-item">
+              <div class="col-lg-6">
+                <img
+                  src="assets/img/event-custom.jpg"
+                  class="img-fluid"
+                  alt=""
+                />
+              </div>
+              <div class="col-lg-6 pt-4 pt-lg-0 content">
+                <h3>Anniversary Parties</h3>
+
+                <p class="font-italic">
+                  Anniversary parties can bring together a group of guests who
+                  may not have met before or who may not know one another very
+                  well. Couples typically have many loved ones, friends, and
+                  coworkers that have been important to them throughout their
+                  many years of marriage. Some of these folks may not have
+                  crossed paths until the party, or they may not have seen each
+                  other since the couple’s wedding day!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Events Section -->
+
+      <!-- ======= Gallery Section ======= -->
+      <section id="gallery" class="gallery">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Gallery</h2>
+            <p>Some photos from Our events</p>
+          </div>
+        </div>
+
+        <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+          <div class="row no-gutters">
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-1.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-1.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-2.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-2.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-3.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-3.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-4.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-4.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-5.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-5.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-6.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-6.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-7.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-7.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="gallery-item">
+                <a
+                  href="assets/img/gallery/gallery-8.jpg"
+                  class="venobox"
+                  data-gall="gallery-item"
+                >
+                  <img
+                    src="assets/img/gallery/gallery-8.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Gallery Section -->
+
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Contact</h2>
+            <p>Contact Us</p>
+          </div>
+        </div>
+
+        <div class="container" data-aos="fade-up">
+          <div class="row mt-5">
+            <div class="col-lg-4">
+              <div class="info">
+                <div class="address">
+                  <i class="icofont-google-map"></i>
+                  <h4>Location:</h4>
+                  <p>A108 Ajit Road,OM Complex,Bathinda 151001</p>
+                </div>
+
+                <div class="email">
+                  <i class="icofont-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>pushkargoyal9417@gmail.com</p>
+                </div>
+
+                <div class="phone">
+                  <i class="icofont-phone"></i>
+                  <h4>Call:</h4>
+                  <p>+91 8837825822</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="footer-info">
+                <h3>We Service</h3>
+                <p>
+                  A108 Ajit Road,
+                  <br />
+                  OM Complex,Bathinda 151001<br /><br />
+                  <strong>Phone:</strong> +91 8837825822<br />
+                  <strong>Email:</strong> pushkargoyal9417@gmail.com<br />
+                </p>
+                <div class="social-links mt-3">
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook"
+                    ><i class="bx bxl-facebook"></i
+                  ></a>
+                  <a href="#" class="instagram"
+                    ><i class="bx bxl-instagram"></i
+                  ></a>
+                  <a href="#" class="google-plus"
+                    ><i class="bx bxl-skype"></i
+                  ></a>
+                  <a href="#" class="linkedin"
+                    ><i class="bx bxl-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Terms of service</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Privacy policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Our Services</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Marriage Parties</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Anniversary Parties</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Birthday Parties</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Custom Parties</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Other Services</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>We Service</span></strong
+          >. All Rights Reserved
+        </div>
+      </div>
+    </footer>
+    End Footer
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/venobox/venobox.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <!-----------------------------------------modal-signup------------------------------------------------------------------------------------------------------------>
+
+    <form method="POST" action="/signup">
+      <div class="modal" tabindex="-1" id="exampleModal" style="color: black">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Signup</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingEmail"
+                  name="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  placeholder="name@example.com"
+                />
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  name="password"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  placeholder="Password"
+                />
+                <label for="floatingPassword">Password</label>
+              </div>
+              <select name="type" class="btn btn-danger">
+                <option disabled selected>Type</option>
+                <option value="client">Client</option>
+                <option value="vendor">Vendor</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <input
+                type="submit"
+                class="btn btn-secondary"
+                value="Signup"
+                formaction="/signup"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!--------------------------------------------Modal-login-------------------------------------------------------->
+
+    <form method="POST">
+      <div class="modal" tabindex="-1" id="wowmodal" style="color: black">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Login Here</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingemail"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  name="maili"
+                  placeholder="name@example.com"
+                />
+                <label for="floatingemail">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="Pwd"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  name="passi"
+                  placeholder="Password"
+                />
+                <label for="Pwd">Password</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input
+                type="button"
+                value="Login"
+                id="log"
+                class="btn btn-primary"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!----------------------------------------------------------------------------------------------------------------->
+  </body>
+</html>

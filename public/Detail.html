@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.8.2.min.js">
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/angular.min.js"></script>
+    <title>Document</title>
+
+    <style>
+      body{
+        background: #ee9ca7;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #ffdde1, #ee9ca7);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #ffdde1, #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+      h1 {
+        text-align: center;
+        font-family:'Times New Roman', Times, serif;
+        font-style: oblique;
+        font-weight: bolder;
+        
+
+      }
+
+      
+    </style>
+
+    <script>
+
+        var module = angular.module("kuchmodule", []);  // Creating angular module
+        module.controller("kuchbhicontroller", function ($scope, $http) {
+
+            $scope.jsonArray=[];
+            $scope.getInfo=()=>{
+             
+                let id=sessionStorage.getItem('vendorId');
+               
+                $http.get("/vendor-Detail?thisid="+id).then(fxOkKuch, fxNotOkKuch);
+
+                function fxOkKuch(response){
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonArray=response.data;
+
+                }
+                function fxNotOkKuch(response) {
+                    alert(response.data);
+                }
+
+
+            }
+
+        })
+
+    </script>
+</head>
+<body ng-app="kuchmodule" ng-controller="kuchbhicontroller" ng-init="getInfo()">
+
+
+
+  <div class="container mt-5">
+
+    <header class="mt-2 mb-3">
+      <h1>Vendor Details</h1>
+    </header>
+
+    <div class="card mb-3 w-100 text-center shadow p-3 mb-5 bg-body rounded" ng-repeat="ob in jsonArray">
+      <div class="row g-0">
+        <div class="col-md-4 d-flex align-items-center">
+          <img src="proofupload/{{ob.id_proof}}" class="img-fluid rounded-start" alt="vendor-pic">
+        </div>
+        <div class="col-md-8 d-flex align-items-center">
+          <div class="card-body">
+            <h2 class="card-title mb-5 text-danger">{{ob.name}}</h2>
+            <h6 class="card-subtitle mb-2 text-muted">Email</h6>
+            <p class="card-text text-danger">{{ob.email}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">Contact</h6>
+            <p class="card-text text-danger">{{ob.contact}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">City</h6>
+            <p class="card-text text-danger">{{ob.city}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">About</h6>
+            <p class="card-text text-danger">{{ob.other_info}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">Services</h6>
+            <p class="card-text text-danger">{{ob.selected_service}}</p>
+            <span class="badge rounded-pill bg-danger">since {{ob.estd}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    
+    
+</body>
+</html>

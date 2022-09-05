@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-1.8.2.min.js">
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/angular.min.js"></script>
+     
+    <title>Document</title>
+
+    <style>
+
+     h1{
+        text-align: center;
+        font-family:'Times New Roman', Times, serif;
+        font-style: oblique;
+        font-weight: bolder;
+        color: white;
+       
+        background: #000000;  
+        background: -webkit-linear-gradient(to right, #434343, #000000);  
+        background: linear-gradient(to right, #434343, #000000); 
+
+
+        }
+
+       
+        #DelBtn{
+
+            background: #ECE9E6;  
+            background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  
+            background: linear-gradient(to right, #FFFFFF, #ECE9E6); 
+            border: 1px solid #eeee;
+            border-radius: 20px;
+
+        }
+
+       #DelBtn:hover{
+
+           background:crimson;
+           color:cornsilk
+         }
+
+    </style>
+
+    <script>
+        var module = angular.module("kuchmodule", []);
+        module.controller("kuchbhicontroller", function ($scope, $http) {
+            $scope.jsonArray = [];
+            $scope.doshow = function () {
+                $http.get("/fetch-user").then(fxOkKuch, fxNotOkKuch);
+                function fxOkKuch(response) {
+
+                    //alert(JSON.stringify(response.data));
+                    $scope.jsonArray = response.data;
+                }
+
+                function fxNotOkKuch(response) {
+                    alert(response.data);
+                }
+            }
+
+            
+            $scope.doDelete = function (uidKu) {
+
+                if (confirm("R u Sure?") == false)
+                    return;
+
+                $http.get("/user-delete?uidm=" + uidKu).then(fxOkKuch, fxNotOkKuch);
+
+                function fxOkKuch(response) {
+                    //alert(response.data);
+                    $scope.doshow();
+
+                }
+
+                function fxNotOkKuch(response) {
+                    alert(response.data);
+                }
+            }
+        })
+
+
+
+    </script>
+</head>
+
+<body ng-app="kuchmodule" ng-controller="kuchbhicontroller">
+
+    <header class="mt 3">
+
+        <h1>Vendor Control Panel</h1>
+
+    </header>
+        
+            
+    
+    <div class="text-center mt-4">
+
+        <input type="button" value="Show All Vendors" class="btn btn-secondary mb-5 mt-2" ng-click="doshow();">
+
+    </div>
+    
+   
+
+       
+
+        <table class="table table-striped table-hover table-dark table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Sr. No.</th>
+                <th scope="col">EMAILID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">CONTACT</th>
+                <th scope="col">FIRM</th>
+                <th scope="col">ESTD</th>
+                <th scope="col">ADHAAR_NO</th>
+                <th scope="col">CITY</th>
+                <th scope="col">SERVICES</th>
+                <th scope="col">INFO</th>
+                <th scope="col">PROOF</th>
+                <th scope="col">CLEAR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  ng-repeat="obj in jsonArray">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{obj.email}}</td>
+                <td>{{obj.name}}</td>
+                <td>{{obj.contact}}
+                </td>
+                <td>{{obj.firm}}</td>
+                <td>{{obj.estd}}</td>
+                <td>{{obj.adhaar_no}}</td>
+                <td>{{obj.city}}</td>
+                <td>{{obj.selected_service}}</td>
+                <td>{{obj.other_info}}</td>
+                <td>{{obj.id_proof}}</td>
+                <td align="center">
+                    <input type="button" value="delete" id="DelBtn" ng-click="doDelete(obj.emailid);">
+                </td>
+              </tr>
+             
+            </tbody>
+          </table>
+    
+
+</body>

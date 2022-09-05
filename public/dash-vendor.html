@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      h1 {
+          text-align: center;
+          font-family:'Times New Roman', Times, serif;
+          font-style: oblique;
+          font-weight: bolder;
+          color: whitesmoke;
+        }
+    </style>
+
+    <script>
+      var clientPass;
+      $(document).ready(function () {
+
+        $("#floatingInputEmail").blur(()=>{
+      
+      var clientEmail= $("#floatingInputEmail").val();
+      var url="/Find-user?thisone="+clientEmail;
+      $.get(url,function(KuchResultAry){
+        
+        JSON.stringify(KuchResultAry);
+        if(KuchResultAry.length==0)
+          alert("Sorry ! Invalid Email");
+        else{
+          
+          clientPass=KuchResultAry[0].password;
+
+        }
+
+      })
+    })
+
+    $("#floatingoldPassword").blur(()=>{
+
+let pass=$("#floatingoldPassword").val();
+
+if(clientPass!=pass)
+  alert("Sorry ! Invalid Password");
+
+
+})
+
+$("#LogOut").click(()=>{
+      sessionStorage.removeItem("person");
+      $.get('/logout',()=>{
+        alert("Logged Out");
+      })
+      
+    })
+
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      
+      <div class="row bg-dark">
+
+        <div class="col-md-2 p-1">
+          <img src="pics/logo.jpg" class="img-fluid float-left w-50" style="border-radius: 50%;" alt="">
+        </div>
+  
+        <div class="col-md-7 d-flex align-items-center justify-content-center">
+  
+          <header>
+            <h1>Welcome To Vendor Dashboard</h1>
+          </header>
+        </div>
+  
+        <div class="col-md-3 d-flex justify-content-end">
+          <button id="LogOut" class="btn btn-outline-danger align-self-center">Log Out</button>
+        </div>
+  
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="pics/OIP (2).jfif" class="card-img-top" />
+            <div class="card-body">
+             <div class="text-center">
+                <h5 class="card-title">PROFILE</h5>
+                <a href="NewProfileVendor.html" class="btn btn-primary"
+                  >Profile</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="pics/OIP (1).jfif" class="card-img-top" />
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-title">SETTINGS</h5>
+
+                <input
+                  type="button"
+                  id="settings"
+                  value="Settings"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal" data-bs-target="#setmodal"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <img src="pics/OIP (3).jfif" class="card-img-top" />
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-title">LOG OUT</h5>
+                <button  class="btn btn-primary" id="LogOut">Log Out</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!----------------------Change Password Modal------------------------------------  -->
+
+    <form method="POST">
+      <div class="modal" tabindex="-1" id="setmodal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Change Password</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatingInputEmail"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  name="mail"
+                  placeholder="name@example.com"
+                />
+                <label for="floatingInputEmail">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingoldPassword"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  name="oldpass"
+                  placeholder="Old Password"
+                />
+                <label for="floatingoldPassword">Old Password</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  name="pass"
+                  placeholder="Password"
+                />
+                <label for="floatingPassword">Password</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input
+                type="submit"
+                class="btn btn-primary"
+                id="up"
+                value="Update"
+                formaction="/update-password"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
